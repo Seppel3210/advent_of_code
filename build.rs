@@ -46,7 +46,7 @@ mod runner {{
         writeln!(
             out,
             "
-    pub fn run_{part}(day: u32, input: &str) {{
+    pub fn run_{part}(day: u32, input: &str) -> String {{
         match day {{"
         )
         .unwrap();
@@ -54,9 +54,7 @@ mod runner {{
             writeln!(
                 out,
                 "
-            {day} => {{
-                crate::{name}::{part}(input);
-            }}"
+            {day} => crate::{name}::{part}(input),"
             )
             .unwrap();
         }

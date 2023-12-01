@@ -26,13 +26,17 @@ fn main() -> Result<()> {
     let input = setup(day)?;
     println!("Running day {day} part 1:");
     let start = Instant::now();
-    runner::run_part1(day, &input);
+    let result = runner::run_part1(day, &input);
     println!("took {:?}", start.elapsed());
+    println!("output: {result}");
+
+    println!();
 
     println!("Running day {day} part 2:");
     let start = Instant::now();
-    runner::run_part2(day, &input);
+    let result = runner::run_part2(day, &input);
     println!("took {:?}", start.elapsed());
+    println!("output: {result}");
     Ok(())
 }
 

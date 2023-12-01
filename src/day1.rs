@@ -1,4 +1,4 @@
-pub fn part1(input: &str) {
+pub fn part1(input: &str) -> String {
     let sum: u32 = input
         .lines()
         .map(|l| {
@@ -7,7 +7,7 @@ pub fn part1(input: &str) {
             format!("{first}{last}").parse::<u32>().unwrap()
         })
         .sum();
-    println!("{sum}");
+    format!("{sum}")
 }
 
 fn parse_line(line: &str) -> (u32, u32) {
@@ -54,7 +54,7 @@ fn parse_line(line: &str) -> (u32, u32) {
     (first, last)
 }
 
-pub fn part2(input: &str) {
+pub fn part2(input: &str) -> String {
     let sum: u32 = input
         .lines()
         .map(|l| {
@@ -62,5 +62,5 @@ pub fn part2(input: &str) {
             format!("{}{}", first, last).parse::<u32>().unwrap()
         })
         .sum();
-    println!("{sum}");
+    format!("{sum}")
 }
