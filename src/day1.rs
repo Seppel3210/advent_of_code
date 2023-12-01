@@ -1,12 +1,9 @@
-use std::fs;
-
-pub fn part1() {
-    let input = fs::read_to_string("input/day1.txt").unwrap();
+pub fn part1(input: &str) {
     let sum: u32 = input
         .lines()
         .map(|l| {
-            let first = l.chars().find(|c| c.is_digit(10)).unwrap();
-            let last = l.chars().rfind(|c| c.is_digit(10)).unwrap();
+            let first = l.chars().find(|c| c.is_ascii_digit()).unwrap();
+            let last = l.chars().rfind(|c| c.is_ascii_digit()).unwrap();
             format!("{first}{last}").parse::<u32>().unwrap()
         })
         .sum();
@@ -27,7 +24,7 @@ fn parse_line(line: &str) -> (u32, u32) {
     ];
     let mut first = 0;
     'outer: for i in 0..line.len() {
-        if let Some(val) = line[i..].chars().nth(0).unwrap().to_digit(10) {
+        if let Some(val) = line[i..].chars().next().unwrap().to_digit(10) {
             first = val;
             break 'outer;
         } else {
@@ -57,13 +54,11 @@ fn parse_line(line: &str) -> (u32, u32) {
     (first, last)
 }
 
-pub fn part2() {
-    let input = fs::read_to_string("input/day1.txt").unwrap();
+pub fn part2(input: &str) {
     let sum: u32 = input
         .lines()
         .map(|l| {
             let (first, last) = parse_line(l);
-            println!("{l} => {first}, {last}");
             format!("{}{}", first, last).parse::<u32>().unwrap()
         })
         .sum();
