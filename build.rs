@@ -31,7 +31,7 @@ fn generate_code(days: Vec<(u32, String)>, current_day: u32) -> String {
     let mut out = String::new();
     let src = env::var("CARGO_MANIFEST_DIR").unwrap() + "/src";
     for (_, name) in &days {
-        writeln!(out, r#"#[path = "{src}/{name}.rs"] pub mod {name};"#).unwrap();
+        writeln!(out, r#"#[path = r"{src}/{name}.rs"] pub mod {name};"#).unwrap();
     }
     writeln!(out, "mod runner {{").unwrap();
     for part in ["part1", "part2"] {
