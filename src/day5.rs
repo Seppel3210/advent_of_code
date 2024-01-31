@@ -28,7 +28,7 @@ pub fn part1(input: &str) -> String {
 
     for map in &maps {
         for seed in &mut seeds {
-            let Some((&src, &(dst, len))) = map.upper_bound(Bound::Included(seed)).key_value()
+            let Some((&src, &(dst, len))) = map.upper_bound(Bound::Included(seed)).peek_prev()
             else {
                 continue;
             };
@@ -73,7 +73,7 @@ pub fn part2(input: &str) -> String {
                 continue;
             }
             let cursor = map.upper_bound(Bound::Included(&start));
-            if let Some((&src, &(dst, map_len))) = cursor.key_value() {
+            if let Some((&src, &(dst, map_len))) = cursor.peek_prev() {
                 if src + map_len <= start {
                     check_next_map(cursor, start, len, &mut seed_ranges, &mut current_ranges);
                 } else {
@@ -105,8 +105,7 @@ fn check_next_map(
     seed_ranges: &mut Vec<(u64, u64)>,
     current_ranges: &mut Vec<(u64, u64)>,
 ) {
-    cursor.move_next();
-    let Some((&src, _)) = cursor.key_value() else {
+    let Some((&src, _)) = cursor.next() else {
         seed_ranges.push((start, len));
         return;
     };
